@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
 import kotlinx.android.synthetic.main.activity_main.*
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -14,6 +15,8 @@ import java.math.RoundingMode
 class MainActivity : AppCompatActivity() {
 
     lateinit var cheque: Cheque
+    var currency = BigDecimal("1")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,22 +72,41 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun updateText() {
         cheque.check=cheque.check.setScale(2, RoundingMode.CEILING)
         cheque.tipPercent=cheque.tipPercent.setScale(2, RoundingMode.CEILING)
         cheque.tipAmount=(cheque.tipPercent * cheque.check / 100.toBigDecimal())
             .setScale(2, RoundingMode.CEILING)
         if(rounding_switch.isChecked){
-            cheque.total = (cheque.check + cheque.tipAmount).setScale(0, RoundingMode.CEILING)
+            cheque.total = ((cheque.check + cheque.tipAmount) * currency).setScale(0, RoundingMode.CEILING)
 
         }
         else {
-            cheque.total = (cheque.check + cheque.tipAmount).setScale(2, RoundingMode.CEILING)
+            cheque.total = ((cheque.check + cheque.tipAmount) * currency).setScale(2, RoundingMode.CEILING)
         }
         tip_amount.text = cheque.tipAmount.toString()
         total_amount.text = cheque.total.toString()
         starting_tip.text = cheque.tipPercent.toString()+"%"
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.dollar -> {
+                currency = BigDecimal("0.1")
+                updateText()
+                return true
+            }
+            R.id.euro -> {
+                currency = BigDecimal("0.15")
+                updateText()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

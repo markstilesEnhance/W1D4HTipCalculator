@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">W1D4HTipCalculator</string>
-    <string name="check_info">Check Amount</string>
-    <string name="round_info">Round up to nearest $</string>
-    <string name="tip">+Tip</string>
+    <string name="app_name">Calculadora de Propinas</string>
+    <string name="check_info">Cantidad de Cheque</string>
+    <string name="round_info">Redondear al $ más cercano</string>
+    <string name="tip">+Propina</string>
     <string name="total">Total</string>
-    <string name="pay">Pay</string>
+    <string name="pay">Pagar</string>
     <string name="down_button">Thumb down</string>
     <string name="mixed_button">Thumbs up and down</string>
     <string name="up_button">Thumb up</string>
     <string name="zero">0</string>
     <string name="starting_tip">15.00%</string>
     <string name="logo">Simple knife and fork logo</string>
-    <string name="dollar">Dollar</string>
+    <string name="dollar">Dólar</string>
     <string name="euro">Euro</string>
 </resources>
